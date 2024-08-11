@@ -11,7 +11,6 @@ function AllPokemon(){
             const {data} = await axios.get('https://pokeapi.co/api/v2/pokemon');
             setPokemon(data.results);
             setNextPage(data.next);
-            console.log('link', data.next);
             return data.results;
         } catch (err){
             console.error(err)
@@ -23,33 +22,37 @@ function AllPokemon(){
     let loadMorePokemon= async() =>{
         try{
             let{data}= await axios.get(nextPage);
-            console.log('new list of pokemon', [...pokemon, ...data.results]);
             setPokemon((prevList) => [...prevList, ...data.results]);
-            console.log('pokemon on state after load', pokemon);
             setNextPage(data.next);
         }catch (err){
             console.error(err)
             console.log('Error loading more pokemon ', err)
         }
     };
-    return( 
+
+    return ( 
     <>
         <h1> Pokemon!</h1>
-        <div>
+        <div className='container'>
+            <div className='row'>
             {pokemon.map((poke) =>{
                 const pokemonId= poke.url.split('/')[6];
                 const imageUrl= `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`;
                 return(
-                    <div key={poke.name}>
-                        <h3>{poke.name}</h3>
-                        <img src={imageUrl} alt= {poke.name}/>
+                    <div key={poke.name} className='card col-md-2 mb-4 mx-3'>
+                        <img src={imageUrl} alt= {poke.name} className='card-img-top'/>
+                        <div className= 'card-body'>
+                        <h3 className='card-title text-center'>{poke.name}</h3>
                     </div>
-                )
+                </div>
+                );
             })}
+        </div>
         </div>
         <button onClick={() => loadMorePokemon()}> Load More Pokemon </button>
     </>
     );
-}
 
+}
 export default AllPokemon;
+
