@@ -1,16 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
+import './App.css';
 import reportWebVitals from './reportWebVitals';
-import bootstrap from 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AllPokemon from './AllPokemon';
+import AppRoutes from './AppRoutes';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <AllPokemon />
+    <nav class="navbar bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top"/>
+      Pokemon
+    </a>
+  </div>
+</nav>
+    <AppRoutes/>
   </React.StrictMode>
 );
 
